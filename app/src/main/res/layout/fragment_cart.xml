@@ -2,31 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp">
 
     <TextView
-        android:id="@+id/tvDetailInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Data akan tampil di sini" />
+        android:text="Keranjang Belanja"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
 
-    <Button
-        android:id="@+id/btnDialPhone"
+    <TextView
+        android:id="@+id/tvOrderDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call Center Kampus" />
+        android:text="Data akan tampil di sini"
+        android:textSize="16sp"
+        android:lineSpacingExtra="6dp" />
 
     <Button
-        android:id="@+id/btnOpenMap"
+        android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lokasi Kampus" />
-
-    <Button
-        android:id="@+id/btnOpenWeb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Website Kampus" />
+        android:text="Checkout (Selesaikan Transaksi)"
+        android:layout_marginTop="32dp" />
 </LinearLayout>

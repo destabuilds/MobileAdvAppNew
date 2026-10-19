@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <!-- 1. LoginFragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mobileadvappnew.ui.LoginFragment"
+        android:label="Login Fragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+    </fragment>
+
+    <!-- 2. CategoryFragment -->
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.mobileadvappnew.ui.CategoryFragment"
+        android:label="Category Fragment"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_categoryFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <!-- 3. ProductDetailFragment -->
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.mobileadvappnew.ui.ProductDetailFragment"
+        android:label="Product Detail Fragment"
+        tools:layout="@layout/fragment_product_detail">
+        <action
+            android:id="@+id/action_productDetailFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+
+    <!-- 4. CartFragment dengan Argument & PopUpTo -->
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.mobileadvappnew.ui.CartFragment"
+        android:label="Cart Fragment"
+        tools:layout="@layout/fragment_cart">
+        <argument
+            android:name="productName"
+            app:argType="string"
+            android:defaultValue="Laptop Gaming AMIKOM" />
+        <argument
+            android:name="quantity"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_cartFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment"
+            app:popUpTo="@id/categoryFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+</navigation>
