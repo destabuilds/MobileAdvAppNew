@@ -5,7 +5,6 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.mobileadvappnew.data.local.AppDatabase
-import com.example.mobileadvappnew.data.local.Course
 import com.example.mobileadvappnew.data.local.CourseDao
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking

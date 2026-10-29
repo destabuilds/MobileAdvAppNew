@@ -28,11 +28,12 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch(Dispatchers.IO) {
             val db = AppDatabase.getDatabase(applicationContext)
-
             db.courseDao().insertCourse(
                 Course(
-                    courseCode = "IF123", courseName = "Pemrograman Mobile Lanjut",
-                    credits = 4, lecturerName = "Tim Dosen"
+                    courseCode = "IF123",
+                    courseName = "Pemrograman Mobile Lanjut",
+                    credits = 4,
+                    lecturerName = "Tim Dosen"
                 )
             )
         }
