@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Form Input Mata Kuliah"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp" />
+
+    <EditText
+        android:id="@+id/edtCourseCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kode Mata Kuliah"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edtCourseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Mata Kuliah"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edtCourseLecturer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Dosen"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edtCourseCredits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jumlah SKS"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnSaveCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simpan Mata Kuliah"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

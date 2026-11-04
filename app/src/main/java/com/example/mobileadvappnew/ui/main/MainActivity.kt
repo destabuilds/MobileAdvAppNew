@@ -6,17 +6,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.example.mobileadvappnew.data.local.AppDatabase
-import com.example.mobileadvappnew.data.local.Course
 import com.example.mobileadvappnew.data.local.SettingPreferences
 import com.example.mobileadvappnew.data.local.dataStore
+import com.example.mobileadvappnew.databinding.ActivityCourseBinding
 import com.example.mobileadvappnew.ui.LoginActivity
 import com.example.mobileadvappnew.ui.main.SettingViewModel
 import com.example.mobileadvappnew.ui.main.SettingsActivity
 import com.example.mobileadvappnew.ui.main.ViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,23 +22,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getDatabase(applicationContext)
-            db.courseDao().insertCourse(
-                Course(
-                    courseCode = "IF123",
-                    courseName = "Pemrograman Mobile Lanjut",
-                    credits = 4,
-                    lecturerName = "Tim Dosen"
-                )
-            )
-        }
-
         val pref = SettingPreferences.getInstance(applicationContext.dataStore)
         viewModel = ViewModelProvider(this, ViewModelFactory(pref))[SettingViewModel::class.java]
 
         val tvWelcome = findViewById<TextView>(R.id.tvWelcome)
         val tvToken = findViewById<TextView>(R.id.tvToken)
+        val btnMK = findViewById<Button>(R.id.btnMK)
+        val btnMahasiswa = findViewById<Button>(R.id.btnMahasiswa)
         val btnSettings = findViewById<Button>(R.id.btnSettings)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
 
@@ -61,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         btnSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        btnMK.setOnClickListener {
+            startActivity(Intent(this, ActivityCourseBinding::class.java))
         }
 
         // Feature Logout (Tugas 3)

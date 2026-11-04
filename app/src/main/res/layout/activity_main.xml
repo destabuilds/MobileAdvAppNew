@@ -37,6 +37,20 @@
         android:text="Lihat Kategori Produk" />
 
     <Button
+        android:id="@+id/btnMK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kelola Mata Kuliah (Room DB)"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnMahasiswa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kelola Mahasiswa (Room DB)"
+        android:layout_marginTop="8dp" />
+
+    <Button
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
