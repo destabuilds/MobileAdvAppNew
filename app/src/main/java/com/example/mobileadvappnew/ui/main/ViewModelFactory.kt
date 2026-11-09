@@ -14,13 +14,3 @@ class ViewModelFactory(private val pref: SettingPreferences) : ViewModelProvider
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 }
-
-class CourseViewModelFactory(private val courseDao: CourseDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CourseViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CourseViewModel(courseDao) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}

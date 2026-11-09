@@ -1,4 +1,4 @@
-package com.example.mobileadvappnew.ui.main
+package com.example.mobileadvappnew.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
