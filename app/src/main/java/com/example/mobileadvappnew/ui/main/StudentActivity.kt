@@ -5,15 +5,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mobileadvappnew.data.local.AppDatabase
-import com.example.mobileadvappnew.data.local.StudentDao
+import com.example.mobileadvapp.ui.StudentAdapter
 import com.example.mobileadvappnew.databinding.ActivityStudentBinding
-import com.example.mobileadvappnew.ui.StudentAdapter
 import com.example.mobileadvappnew.ui.StudentViewModel
 import kotlinx.coroutines.launch
 
@@ -21,24 +17,54 @@ class StudentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStudentBinding
     private lateinit var studentAdapter: StudentAdapter
-
-    private val studentViewModel: StudentViewModel by viewModels {
-        StudentViewModelFactory(AppDatabase.getDatabase(this).studentDao())
-    }
+    private val studentViewModel: StudentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup RecyclerView
-        studentAdapter = StudentAdapter()
-        binding.rvStudent.apply {
-            adapter = studentAdapter
-            layoutManager = LinearLayoutManager(this@StudentActivity)
+        setupRecyclerView()
+        setupListeners()
+        observeStudentList()
+    }
+
+    private fun setupRecyclerView() {
+        studentAdapter = StudentAdapter { student ->
+            Toast.makeText(
+                this,
+                "Diklik: ${student.name} (${student.nim})",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
-        // Mengamati StateFlow secara reaktif dari StudentViewModel
+        binding.rvStudents.apply {
+            layoutManager = LinearLayoutManager(this@StudentActivity)
+            adapter = studentAdapter
+        }
+    }
+
+    private fun setupListeners() {
+        binding.btnSaveStudent.setOnClickListener {
+            val nim = binding.etNim.text.toString().trim()
+            val name = binding.etName.text.toString().trim()
+            val prodi = binding.etStudyProgram.text.toString().trim()
+
+            if (nim.isNotEmpty() && name.isNotEmpty() && prodi.isNotEmpty()) {
+                // Panggil langsung variabel string-nya (bukan memasukkan objek Student)
+                studentViewModel.insertStudent(name, nim, prodi)
+
+                // Bersihkan input
+                binding.etNim.text?.clear()
+                binding.etName.text?.clear()
+                binding.etStudyProgram.text?.clear()
+            } else {
+                Toast.makeText(this, "Harap isi semua field", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun observeStudentList() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 studentViewModel.allStudents.collect { studentList ->
@@ -46,34 +72,5 @@ class StudentActivity : AppCompatActivity() {
                 }
             }
         }
-
-        // Action Klik Tombol Simpan
-        binding.btnSave.setOnClickListener {
-            val name = binding.edtName.text.toString()
-            val nim = binding.edtNim.text.toString()
-            val program = binding.edtProgram.text.toString()
-
-            if (name.isNotEmpty() && nim.isNotEmpty() && program.isNotEmpty()) {
-                studentViewModel.insertStudent(name, nim, program)
-
-                binding.edtName.text?.clear()
-                binding.edtNim.text?.clear()
-                binding.edtProgram.text?.clear()
-
-                Toast.makeText(this, "Data Mahasiswa Berhasil Disimpan", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Harap isi semua inputan!", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-}
-
-class StudentViewModelFactory(private val studentDao: StudentDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(StudentViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return StudentViewModel(studentDao) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

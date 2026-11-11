@@ -1,4 +1,4 @@
-package com.example.mobileadvappnew.ui
+package com.example.mobileadvapp.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileadvappnew.data.local.Student
 import com.example.mobileadvappnew.databinding.ItemStudentBinding
 
-class StudentAdapter : ListAdapter<Student, StudentAdapter.StudentViewHolder>(DiffCallback) {
+class StudentAdapter(
+    private val onItemClick: (Student) -> Unit
+) : ListAdapter<Student, StudentAdapter.StudentViewHolder>(DiffCallback) {
+
+    class StudentViewHolder(private val binding: ItemStudentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(student: Student, onItemClick: (Student) -> Unit) {
+            binding.tvName.text = student.name
+            binding.tvNim.text = "NIM: ${student.nim}"
+            binding.tvStudyProgram.text = student.studyProgram
+            binding.root.setOnClickListener { onItemClick(student) }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val binding = ItemStudentBinding.inflate(
@@ -20,29 +33,16 @@ class StudentAdapter : ListAdapter<Student, StudentAdapter.StudentViewHolder>(Di
     }
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
-        val student = getItem(position)
-        holder.bind(student)
+        holder.bind(getItem(position), onItemClick)
     }
 
-    class StudentViewHolder(private val binding: ItemStudentBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(student: Student) {
-            binding.tvStudentName.text = student.name
-            binding.tvStudentNim.text = "NIM: ${student.nim}"
-            binding.tvStudentProgram.text = "Program Studi: ${student.studyProgram}"
+    companion object DiffCallback : DiffUtil.ItemCallback<Student>() {
+        override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
+            return oldItem.id == newItem.id
         }
-    }
 
-    companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<Student>() {
-            override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
-                return oldItem.nim == newItem.nim
-            }
-
-            override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {
-                return oldItem == newItem
-            }
+        override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {
+            return oldItem == newItem
         }
     }
 }

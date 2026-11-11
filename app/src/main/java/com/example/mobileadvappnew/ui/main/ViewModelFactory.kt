@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.mobileadvappnew.data.local.CourseDao
 import com.example.mobileadvappnew.data.local.SettingPreferences
+import com.example.mobileadvappnew.ui.StudentViewModel
 
 class ViewModelFactory(private val pref: SettingPreferences) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")

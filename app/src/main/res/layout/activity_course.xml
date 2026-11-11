@@ -1,99 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".ui.main.CourseActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Form Input Mata Kuliah"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Form Input Kode -->
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Kode Mata Kuliah">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtCourseCode"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Form Input Mata Kuliah"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etCourseCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapCharacters" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="Kode Mata Kuliah" />
 
-    <!-- Form Input Nama Mata Kuliah -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Nama Mata Kuliah">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtCourseName"
+        <EditText
+            android:id="@+id/etCourseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="Nama Mata Kuliah" />
 
-    <!-- Form Input SKS -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Jumlah SKS">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtCourseCredits"
+        <EditText
+            android:id="@+id/etCredits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Jumlah SKS"
             android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Form Input Dosen -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Nama Dosen">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtCourseLecturer"
+        <EditText
+            android:id="@+id/etLecturerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="Nama Dosen" />
 
-    <!-- Tombol Simpan -->
-    <Button
-        android:id="@+id/btnSaveCourse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Simpan Mata Kuliah" />
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Simpan Mata Kuliah" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Daftar Mata Kuliah"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Daftar Mata Kuliah"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <!-- RecyclerView untuk Menampilkan Data Mata Kuliah -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCourse"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:listitem="@layout/item_course" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCourses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
